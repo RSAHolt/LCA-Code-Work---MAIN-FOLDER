@@ -1,0 +1,68 @@
+/* General Layout */
+* {
+    max-width: 800px ;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: Arial, Helvetica, sans-serif; 
+}
+/* Input layout */
+input, select {
+    display: block;
+    width: 100% 100%;
+    padding: 12px;
+    border-radius: 4px;
+    border:1px solid #ddd;
+}
+/* Form layout */
+form {
+    font-family: Arial, Helvetica, sans-serif;
+   
+}
+/* Label layout */
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+/* Button layout */
+button {
+    background-color: #2196f3;
+    color: white;
+    padding: 12px 24px;
+    transition-duration: 1s;
+
+}
+/* Hover for button */
+button:hover {
+    background-color: rgb(0, 0, 0) ;
+    color: #2196f3;
+    transform: scale(1.2);
+}
+/* Table layout */
+table,tr,td,th {
+    border-collapse: collapse;
+    border:1px solid;
+    padding 10px 10px;
+    width:50px ;
+    overflow-x:scroll;
+    table-layout: fixed;
+}
+/* Getting table to be striped */
+tr:nth-child(odd) {
+    background-color: bisque;
+}
+tr:nth-child(even) {
+    background-color: #f9f9f9;}
+/* Hover effect on rows? Opted rather for elements in rows to show that particular time slot */
+    td:hover {
+    background-color: black;
+    color: #f9f9f9;
+}
+
+/* Media Query for Larger Screens */
+@media (min-width: 600px) {
+    /* Increase padding for larger screens on input,select,button,tr,td and th */
+    input, select, button,tr,td,th {
+        padding: 1.5rem; 
+    }
+}

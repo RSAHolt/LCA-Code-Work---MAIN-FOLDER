@@ -1,0 +1,88 @@
+/* General format */
+*{
+    box-sizing: border-box;
+}
+/* Background color to top navigation */
+.topnav {
+    background-color: #333;
+    overflow: hidden;
+    text-align: center;
+    padding:15px;
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-around;
+    max-width:800px;
+    margin-left: auto;
+    margin-right: auto;
+     
+}
+    
+  
+/* Style of links inside navigation bar */
+.topnav a {
+    float: left;
+    color:white;
+    text-align: center;
+    padding: 15px 15px;
+    text-decoration: none;
+    font-size: 17px;
+    }
+  
+/*  Color Change of links */
+.topnav a:hover {
+    background-color:#333;
+    color:#3498db;
+    text-decoration: underline;
+    }
+
+/* General format of articles */
+#articles{
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin-left:auto;
+    margin-right: auto;
+    text-align:center;
+    font-size: 20px;
+    font-family: Arial, san-serif;
+    color: #2c3e50;
+}
+
+h1{
+    text-align: center;
+    font-size: 24px;
+    font-family: Arial, san-serif;
+    color: #2c3e50;
+}
+h2{
+    text-align: center;
+    font-size: 20px;
+    font-family: Arial, san-serif;
+    color: #2c3e50;
+}
+#about{
+  text-align: center;
+  font-size: 20px;
+  font-family: Arial, san-serif;
+  color: #2c3e50;
+}
+table, th, td{
+    text-align: center;
+    font-family: Arial, san-serif;
+    max-width: 800px;
+    margin-left:auto;
+    margin-right: auto;
+    margin-top: 100px;
+    background-color: bisque;
+    border-collapse:collapse;
+    border:5px solid white;
+}
+th, td{
+    
+}
+
+header{
+    text-align: center;
+}

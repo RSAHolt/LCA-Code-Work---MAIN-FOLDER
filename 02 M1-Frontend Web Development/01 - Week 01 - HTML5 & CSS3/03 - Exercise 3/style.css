@@ -1,0 +1,25 @@
+header{
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+
+}
+table{
+    margin: ;
+    background-color: black;
+    text-align: right;
+    width: 1000px;
+    height: 400px;
+
+}
+
+tr{
+    background-color: white;
+}
+
+.First{
+    text-align:left
+}
+
+.Second{
+    text-align: center;
+}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 4 - Forms</title>
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link
+     href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"
+    />
+    <!--Internal Styling-->
+    <style>
+    body{
+        font-family: "Raleway", sans-serif;
+    }
+    form{
+        border: 1px solid black;
+        padding: 20px;
+        border-radius: 5px;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    input, select{
+        display: block;
+        margin-top: 5px;
+        margin-bottom: 10px;
+    }
+    input[type="radio" i]{
+        display: inline;
+        color: red;
+    }
+    label[name="Rate_Content"],
+    label[name="Extra_Comments"],
+    label[name="Rate_Lecturer"]{
+        display: block;
+    }
+    .lecturer-label{
+        display:block;
+    }
+    #label-label{
+        display:block;
+    }
+    button{
+        display:block;
+    }
+</style>
+</head>
+<body>
+    <h1>Working with forms</h1>
+    <!--Forms start-->
+    <!--Create a feedback form for the LCA students based on the Lectures: 
+    Full Name, Email, Cell, Course, Rate your Lecturer, Rate the Content, Extra-->
+    <form action="http://httpbin.org/post" method="post" >
+        <!--Full Name-->
+        <label>Enter your full name:</label>
+        <input type="text" name="fullname" placeholder="John Doe">
+
+        <!--Email Address-->
+        <label >Enter your email address:</label>
+        <input type="email" name="email" placeholder="johndoe@example.com">
+
+        <!--Cellphone Number-->
+        <label >Enter your cellphone number:</label>
+        <input type="number" name="cell_number" placeholder="084 696 9696">
+
+        <!--Module-->
+        <label >Which module did you complete?</label>
+        <select name="" id="">
+            <option value="Foundation_Module">Foundation Module</option>
+            <option value="Frontend_Web_Dev">Frontend Web Dev</option>
+        </select>
+         <!--MRate from 1 to 5-->
+         <label id="label-label" >Rate from 1 to 5:</label>
+         <label>1</label><input type="radio" name="m_rating" value="1">
+         <label>2</label><input type="radio" name="m_rating" value="2">
+         <label>3</label><input type="radio" name="m_rating" value="3">
+         <label>4</label><input type="radio" name="m_rating" value="4">
+         <label>5</label><input type="radio" name="m_rating" value="5">
+        <!--Select Lecturer-->
+        <label class="lecturer-label">Who was the Lecturer?</label>
+        <select name="" id="">
+            <option value="Khanyiso_Haman">Khanyiso Haman</option>
+            <option value="Matthew_Brown">Matthew Brown</option>
+            <option value=">Ruth_Nzola">Ruth N'Zola</option>
+        </select>
+        
+        <!--LRate from 1 to 5-->
+        <label id="label-label">Rate from 1 to 5:</label>
+        <label>1</label><input type="radio" name="l_rating" value="1">
+        <label>2</label><input type="radio" name="l_rating" value="2">
+        <label>3</label><input type="radio" name="l_rating" value="3">
+        <label>4</label><input type="radio" name="l_rating" value="4">
+        <label>5</label><input type="radio" name="l_rating" value="5">
+        <!--Submit button-->
+        <button type="submit">Submit</button>
+    </form>
+
+</body>
+</html>

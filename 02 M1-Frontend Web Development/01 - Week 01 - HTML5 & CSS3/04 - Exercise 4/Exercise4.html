@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <!--Google Fonts-->
+     <link rel="preconnect" href="https://fonts.googleapis.com"/>
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+     <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"
+     />
+     <!--Link to Css styling-->
+     <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!--Heading-->
+    <h1>Exercise 4</h1>
+     <!--Forms start-->
+     <!--Create a form in your document with the following fields (the required name attribute
+     is in brackets) 
+     • First Name (first_name)
+     • Last Name (last_name)
+     • Gender (gender)
+     • Date of birth (date_of_birth)
+     • Email (email)
+     -->
+     <form action="https://formspree.io/f/xpwzpzrd" method="post">
+         <!--Full Name-->
+         <label>Enter your first Name:</label>
+         <input type="text" name="first_name" placeholder="John">
+         
+         <!--Full Name-->
+        <label>Enter your last name:</label>
+        <input type="text" name="last_name" placeholder="Doe">
+
+        <!--Gender-->
+        <label>Choose your gender:</label>
+        <select name="" id="">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Non_Binary">Non-Binary</option>
+        </select>
+
+        <!--Date of Birth-->
+        <label>Date of birth:</label>
+        <input type="date" name="date_of_birth" id="">
+
+        <!--Email address-->
+        <label>Email address:</label>
+        
+     <input type="email" name="email" placeholder="johndoe@example.com" id="">
+        <!--Submit button-->
+        <button type="submit">Submit</button>
+    </form>
+    <!--Form for search name--> 
+    <form action="http://httpbin.org/get"  method="get">
+        <label>Seach for name:</label>
+        <input type="search" name="search_name" id="">
+        <!--Submit button-->
+        <button type="submit">Submit</button>
+     </form> 
+
+</body>
+</html>

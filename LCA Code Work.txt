@@ -1,0 +1,31 @@
+LCA Code Work - MAIN FOLDER
+>
+01 FM Code - Python Programming
+>
+Exercises
+>
+Exercise 1 - Lesson 1 and 2
+Exercise 2 - Lesson 3 and 4
+Exercise 3 - Lesson 5
+Exercise 4 - Lesson 6 and 7
+Exercise 5 - Lesson 8
+=
+02 M1 - Frontend Web Development
+>
+01 - Week 01 - HTML5 & CSS3
+>
+01 - Exercise 1
+02 - Exercise 202 - Exercise 2
+03 - Exercise 3
+04 - Exercise 4
+05 - Exercise 5
+06 - Exercise 6
+01 - Lesson 1
+02 - Lesson 2
+02 - Week 02 - Advanced CSS & Version Control
+01 - Lesson 1
+02 - git_lecture
+01 - Exercise 1
+02 - Exercise 2
+03 - Exercise 3
+Collap
