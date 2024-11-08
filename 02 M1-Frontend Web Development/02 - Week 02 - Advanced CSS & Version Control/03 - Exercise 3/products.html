@@ -61,11 +61,11 @@
          <!--overlay animation for when hovering over cards-->
          <div class="overlay">
          <!--Loading spinner for info-->
-          <div class="spinner-border" role="status">
+          <div id="spinner-border" class="spinner-border" role="status">
             <span class="visually-hidden">Loading...</span>
           </div>
          <!--info button which should point and reveal image description when active-->
-          <button id="info">&#9432;info</button>
+          <button id="info" onclick='alert("Clicked")'>&#9432;info</button>
           <div class="info">
             <!--Image description-->
             <p>This is the image description</p>
@@ -146,7 +146,7 @@
    <!--overlay animation for when hovering over cards-->
    <div class="overlay">
    <!--Loading spinner for info-->
-    <div class="spinner-border" role="status">
+    <div class="spinner-border" id="spinner-border" role="status">
       <span class="visually-hidden">Loading...</span>
     </div>
    <!--info button which should point and reveal image description when active-->
@@ -183,6 +183,7 @@
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> -->
+<script src="script.js"></script>
 </body>
 </html>

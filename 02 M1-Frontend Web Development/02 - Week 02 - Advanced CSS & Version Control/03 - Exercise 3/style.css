@@ -165,3 +165,6 @@ button:hover {
         grid-template-columns: repeat(3, 1fr); /* 4 columns for desktops */
     }
 }
+.spinner-border{
+    opacity: 0;
+}
