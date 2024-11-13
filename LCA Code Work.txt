@@ -15,7 +15,7 @@ Exercise 5 - Lesson 8
 01 - Week 01 - HTML5 & CSS3
 >
 01 - Exercise 1
-02 - Exercise 202 - Exercise 2
+02 - Exercise 2
 03 - Exercise 3
 04 - Exercise 4
 05 - Exercise 5
