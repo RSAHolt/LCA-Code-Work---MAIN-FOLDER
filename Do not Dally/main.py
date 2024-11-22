@@ -31,7 +31,7 @@ def main():
     start_time = time.time()
     elapsed_time = 0
     jumping=False
-    jump_time=0
+    jump_time=1
 
     while run:
         clock.tick(60)
@@ -40,7 +40,8 @@ def main():
             if event.type == pygame.QUIT:
                 run = False
                 break
-        
+        if player.y<HEIGHT-PLAYER_HEIGHT:
+                player.y+=(PLAYER_VEL*jump_time-0.5*PLAYER_ACC*jump_time**2)
         
         keys = pygame.key.get_pressed()
         if keys[pygame.K_a] and player.x - PLAYER_VEL >=0:
@@ -52,15 +53,14 @@ def main():
                 player.y-= PLAYER_VEL*PLAYER_ACC
         if not jumping:
             if keys[pygame.K_SPACE] and player.y + PLAYER_HEIGHT>=HEIGHT:
-                jumping = True
-                jump_time=0
+                jumping = False
+                jump_time+=1
         else:
             jump_time+=1
-            player.y-=(PLAYER_VEL*jump_time-0.5*PLAYER_ACC*jump_time**2)
 
             if player.y>=HEIGHT-PLAYER_HEIGHT:
                 player.y=HEIGHT-PLAYER_HEIGHT
-                jumping = False
+                jumping = True
                 jump_time=0
 
         draw(player,elapsed_time)
