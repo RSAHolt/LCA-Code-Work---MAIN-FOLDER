@@ -36,6 +36,6 @@ const updateProduct = async(product_code, product_name, product_price, product_q
 
 deleteProduct('baro1');
 insertProduct('chick1','Chicken Biltong','10.00','1');
-updateProduct('cookie','Cookie','10.00','2','bear1')
+updateProduct('cookie1','Cookie','10.00','2','bear1')
 console.log( await getProducts());
 console.log( await getUsers());
