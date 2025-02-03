@@ -1,4 +1,4 @@
-import { pool } from "../config/config.js"
+import { pool } from "../config"
 
 const getProducts = async() => {
     let [data] = await pool.query('SELECT * FROM products')
