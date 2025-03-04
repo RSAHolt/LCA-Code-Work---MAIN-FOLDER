@@ -185,6 +185,7 @@ opacity: 1;
   background-position: center;
   cursor: pointer;
   transition-duration: .25s;
+  transition:transform 0.3s ease;/*Transition for rotation*/
 
 
 }
@@ -197,7 +198,10 @@ background-size: 50%;
 
 
 }
-
+/* added class for rotation */
+.btn-toggle-nav.rotate {
+  transform: rotate(90deg);
+}
 
 .nav-main ul {
 
