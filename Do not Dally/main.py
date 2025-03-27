@@ -8,8 +8,8 @@ WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Do NOT Dally")
 BG = pygame.transform.scale(pygame.image.load("images/souse.png"), (WIDTH, HEIGHT))
 
-PLAYER_WIDTH = 40
-PLAYER_HEIGHT = 60
+PLAYER_WIDTH = 80
+PLAYER_HEIGHT = 120
 PLAYER_VEL = 10
 GRAVITY = 0.5
 JUMP_VEL = 15
@@ -27,12 +27,14 @@ class Platform:
     def check_collision(self, player):
         return player.colliderect(self.rect)
 
-def draw(player, platforms, elapsed_time):
+def draw(player, platforms, elapsed_time, current_frame):
     WIN.blit(BG, (0, 0))
 
     time_text = FONT.render(f"Time: {round(elapsed_time)}s", 1, "yellow")
     WIN.blit(time_text, (10, 10))
-    pygame.draw.rect(WIN, "red", player)
+    
+    # Draw the animated player instead of a rectangle
+    WIN.blit(current_frame, (player.x, player.y))
     
     for platform in platforms:
         platform.draw()
@@ -41,20 +43,56 @@ def draw(player, platforms, elapsed_time):
 
 def main():
     run = True
-    player = pygame.Rect(200, HEIGHT - 100 - PLAYER_HEIGHT, PLAYER_WIDTH, PLAYER_HEIGHT)
+    player = pygame.Rect(200, HEIGHT - 100 - PLAYER_HEIGHT, 80, 120)
     clock = pygame.time.Clock()
     start_time = time.time()
     elapsed_time = 0
     jumping = False
     velocity_y = 0  # Initialize vertical velocity
+    jump_frame_index = 0  # Index for jump animation frames
+    walk_frame_index = 0  # Index for walk animation frames
+    frame_counter = 0  # Frame counter for jump animation
+    walk_frame_counter = 0  # Frame counter for walk animation
+    FRAME_DELAY = 10  # Number of frames between switching jump animation images
+    WALK_FRAME_DELAY = 10  # Number of frames between switching walk animation images
+    
+    # Load the character animation frames for walking
+    walk_images_right = [
+        pygame.transform.scale(pygame.image.load("images/character/walk1.png"),(80, 120)),
+        pygame.transform.scale(pygame.image.load("images/character/walk2.png"),(80, 120)),
+        pygame.transform.scale(pygame.image.load("images/character/walk3.png"),(80, 120)),
+        pygame.transform.scale(pygame.image.load("images/character/walk4.png"),(80, 120))
+    ]
+    
+    # Create a list for the flipped walking frames (for left movement)
+    walk_images_left = [pygame.transform.flip(image, True, False) for image in walk_images_right]
+    
+    # Load the idle frame (if you have one)
+    idle_image_right = pygame.transform.scale(pygame.image.load("images/character/idle.png"),(80, 120))
+    idle_image_left = pygame.transform.flip(idle_image_right, True, False)
+    
+    # Load the character animation frames for jumping
+    jump_images_right = [
+        pygame.transform.scale(pygame.image.load("images/character/jump1.png"),(80, 120)),
+        pygame.transform.scale(pygame.image.load("images/character/jump2.png"),(80, 120)),
+        pygame.transform.scale(pygame.image.load("images/character/jump3.png"),(80, 120))
+    ]
 
+    # Create flipped jump images for the left direction
+    jump_images_left = [pygame.transform.flip(image, True, False) for image in jump_images_right]
+    
+    # Set the initial walking frame index
+    walk_index = 0
+    
+    # Variable to track whether the character is facing left or right
+    is_facing_left = False
+    
     # Creating a list of platform objects
     platforms = [
         Platform(300, 600, 200, 20, "blue"),
         Platform(400, 450, 200, 20, "orange"),
         Platform(100, 350, 200 ,20,"yellow"),
-        Platform(0,780,1000,20,"RED" )
-        # Add more platforms here easily
+        Platform(0, 780, 1000, 20, "RED" )
     ]
 
     while run:
@@ -67,19 +105,55 @@ def main():
                 break
 
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_a] and player.x - PLAYER_VEL >= 0:
-            player.x -= PLAYER_VEL
-        if keys[pygame.K_d] and player.x + PLAYER_VEL + player.width <= WIDTH:
-            player.x += PLAYER_VEL
+
+        # Walking logic
+        if keys[pygame.K_a] or keys[pygame.K_d]:
+            if keys[pygame.K_a]:
+                player.x -= PLAYER_VEL  # Move left
+                is_facing_left = True  # Flip sprite for left movement
+            if keys[pygame.K_d]:
+                player.x += PLAYER_VEL  # Move right
+                is_facing_left = False  # Flip sprite for right movement
+
+            # Animate walking (cycling through walk images)
+            walk_frame_counter += 1
+            if walk_frame_counter >= WALK_FRAME_DELAY:
+                walk_frame_counter = 0  # Reset the counter
+                walk_frame_index += 1  # Move to the next walk frame
+
+                if walk_frame_index >= len(walk_images_right):
+                    walk_frame_index = 0  # Loop the walk animation
+
+            current_frame = walk_images_left[walk_frame_index] if is_facing_left else walk_images_right[walk_frame_index]  # Choose the correct frame
+        else:
+            # If no movement keys are pressed, show the idle frame
+            current_frame = idle_image_left if is_facing_left else idle_image_right
 
         # Jumping logic
         if not jumping:
-            if keys[pygame.K_SPACE] and (player.y + PLAYER_HEIGHT >= (HEIGHT ) or any(platform.check_collision(player) for platform in platforms)):
+            if keys[pygame.K_SPACE] and (player.y + PLAYER_HEIGHT >= HEIGHT or any(platform.check_collision(player) for platform in platforms)):
                 jumping = True
                 velocity_y = -JUMP_VEL
+                jump_frame_index = 0  # Reset jump animation frame
         else:
             velocity_y += GRAVITY
             player.y += velocity_y
+
+            # Increment the frame counter to slow down the animation
+            frame_counter += 1
+            if frame_counter >= FRAME_DELAY:
+                frame_counter = 0  # Reset the counter
+                jump_frame_index += 1  # Move to the next jump frame
+
+                # Cycle through jump frames
+                if jump_frame_index >= len(jump_images_right):
+                    jump_frame_index = 0  # Loop the jump animation
+            
+            # Choose the correct jump frame based on the character's direction
+            if is_facing_left:
+                current_frame = jump_images_left[jump_frame_index]
+            else:
+                current_frame = jump_images_right[jump_frame_index]
 
             # Check for collision with any platform
             for platform in platforms:
@@ -90,11 +164,11 @@ def main():
                     break  # No need to check further platforms once we land
 
         # Apply gravity if the player is not on the ground or platform
-        if not jumping and player.y < HEIGHT - PLAYER_HEIGHT:
+        if not any(platform.check_collision(player) for platform in platforms):
             velocity_y += GRAVITY
             player.y += velocity_y
 
-        draw(player, platforms, elapsed_time)
+        draw(player, platforms, elapsed_time, current_frame)
 
     pygame.quit()
 
