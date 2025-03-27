@@ -55,6 +55,7 @@ def main():
     walk_frame_counter = 0  # Frame counter for walk animation
     FRAME_DELAY = 10  # Number of frames between switching jump animation images
     WALK_FRAME_DELAY = 10  # Number of frames between switching walk animation images
+    FALL_DELAY = 0.3  # Delay before the falling animation starts (in seconds)
     
     # Load the character animation frames for walking
     walk_images_right = [
@@ -80,17 +81,23 @@ def main():
 
     # Create flipped jump images for the left direction
     jump_images_left = [pygame.transform.flip(image, True, False) for image in jump_images_right]
+
+    # Load the character animation frame for falling
+    falling_image_right = pygame.transform.scale(pygame.image.load("images/character/pick2.png"), (80, 120))
+    falling_image_left = pygame.transform.flip(falling_image_right, True, False)
+
     
     # Set the initial walking frame index
     walk_index = 0
     
     # Variable to track whether the character is facing left or right
     is_facing_left = False
+    fall_start_time = None  # To track the start time of falling animation
     
     # Creating a list of platform objects
     platforms = [
         Platform(300, 600, 200, 20, "blue"),
-        Platform(400, 450, 200, 20, "orange"),
+        Platform(400, 100, 200, 20, "orange"),
         Platform(100, 350, 200 ,20,"yellow"),
         Platform(0, 780, 1000, 20, "RED" )
     ]
@@ -135,6 +142,7 @@ def main():
                 jumping = True
                 velocity_y = -JUMP_VEL
                 jump_frame_index = 0  # Reset jump animation frame
+                fall_start_time = None  # Reset fall timer when jumping
         else:
             velocity_y += GRAVITY
             player.y += velocity_y
@@ -147,8 +155,8 @@ def main():
 
                 # Cycle through jump frames
                 if jump_frame_index >= len(jump_images_right):
-                    jump_frame_index = 0  # Loop the jump animation
-            
+                    jump_frame_index = len(jump_images_right)-1  # Prevents Jump index from reaching beyond the limit
+             
             # Choose the correct jump frame based on the character's direction
             if is_facing_left:
                 current_frame = jump_images_left[jump_frame_index]
@@ -161,7 +169,20 @@ def main():
                     player.y = platform.rect.y - PLAYER_HEIGHT  # Place player on top of the platform
                     jumping = False
                     velocity_y = 0  # Reset vertical velocity when landing on the platform
+                    fall_start_time = None  # Reset fall timer when landing
                     break  # No need to check further platforms once we land
+
+        # Falling logic with delay before animation
+        if not any(platform.check_collision(player) for platform in platforms) and velocity_y > 0:
+            if fall_start_time is None:
+                fall_start_time = time.time()  # Start the fall timer when the player begins falling
+            
+            # Check if the delay has passed before showing the falling animation
+            if time.time() - fall_start_time >= FALL_DELAY:
+                if is_facing_left:
+                    current_frame = falling_image_left
+                else:
+                    current_frame = falling_image_right
 
         # Apply gravity if the player is not on the ground or platform
         if not any(platform.check_collision(player) for platform in platforms):
